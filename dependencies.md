@@ -1,5 +1,5 @@
 # Google Apps Script Project: testBmContentServer
-This repo (testBmContentServer) was automatically updated on 8/29/2024, 11:26:49 AM by GasGit
+This repo (testBmContentServer) was automatically updated on 8/29/2024, 3:58:33 PM by GasGit
 
 For more information on gasgit, see the [desktop liberation site](https://ramblings.mcpher.com/drive-sdk-and-github/migrategasgit/ "desktop liberation")
 
@@ -21,11 +21,11 @@ Exports| server_js
 ### Directly referenced libraries
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
-BmContentServer| BmContentServer|12ZqFY1xFQjjuF43JsvQbOASfPwuiazMKTTlwNSGgxyjHLaJ1HC_hu2w5|6|no|[here](libraries/BmContentServer "library source")
+BmContentServer| BmContentServer|12ZqFY1xFQjjuF43JsvQbOASfPwuiazMKTTlwNSGgxyjHLaJ1HC_hu2w5|7|no|[here](libraries/BmContentServer "library source")
 ### All dependencies and sub dependencies
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
-BmContentServer| BmContentServer|12ZqFY1xFQjjuF43JsvQbOASfPwuiazMKTTlwNSGgxyjHLaJ1HC_hu2w5|6|no|[here](libraries/BmContentServer "library source")
+BmContentServer| BmContentServer|12ZqFY1xFQjjuF43JsvQbOASfPwuiazMKTTlwNSGgxyjHLaJ1HC_hu2w5|7|no|[here](libraries/BmContentServer "library source")
 ### Enabled Google Services
 no libraries discovered
 ### Scopes required
