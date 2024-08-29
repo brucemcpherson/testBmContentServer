@@ -1,15 +1,104 @@
-const small ="1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
 
 
-// by default the maxhits is just 1, and time to live is a couple of minutes
-const maxHits = 4
-const timeToLive = 5 * 60
-const id = small
+const helloWorld = () => {
+
+  const link = Exports.ContentServe.toCache({
+    content: 'hello world',
+    accessToken: ScriptApp.getOAuthToken()
+  })
+
+  // tnis link can be used only once and will expire after a short time
+  // you can use it from the browser, to feed a webapp, serverapp - whatever
+  console.log (link)
+
+}
+
+const probeInfo = () => {
+
+  const link = Exports.ContentServe.toCache({
+    content: 'hello world',
+    accessToken: ScriptApp.getOAuthToken(),
+    probeInfo: {
+      name: "hello world",
+      foo: "bar"
+    }
+  })
+
+  // tnis link can be used only once and will expire after a short time
+  // you can use it from the browser, to feed a webapp, serverapp - whatever
+  console.log (link)
+
+}
+
+const fileContent = () => {
+  
+  const small ="1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
+  const content = DriveApp.getFileById(small).getBlob().getDataAsString()
+
+  const link = Exports.ContentServe.toCache({
+    content,
+    accessToken: ScriptApp.getOAuthToken()
+  })
+
+  // tnis link can be used only once and will expire after a short time
+  // you can use it from the browser, to feed a webapp, serverapp - whatever
+  console.log (link)
+
+}
+
+const jsonContent = () => {
+
+  const json ="1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r"
+  const content = DriveApp.getFileById(json).getBlob().getDataAsString()
+
+  const link = Exports.ContentServe.toCache({
+    content,
+    accessToken: ScriptApp.getOAuthToken(),
+    serveAs: "JSON"
+  })
+
+  // tnis link can be used only once and will expire after a short time
+  // you can use it from the browser, to feed a webapp, serverapp - whatever
+  console.log (link)
+
+}
+
+
+const moreHits = () => {
+
+  const json ="1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r"
+  const content = DriveApp.getFileById(json).getBlob().getDataAsString()
+
+  const link = Exports.ContentServe.toCache({
+    content,
+    accessToken: ScriptApp.getOAuthToken(),
+    serveAs: "JSON",
+    maxHits: 10,
+    timeToLive: 5* 60
+  })
+
+  // tnis link can be used only once and will expire after a short time
+  // you can use it from the browser, to feed a webapp, serverapp - whatever
+  console.log (link)
+
+}
+
+
+
+//https://drive.google.com/file/d/1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r/view?usp=drive_link
+
 
 const testMethods = () => {
 
+const small ="1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
+
+// by default the maxhits is just 1, and time to live is a couple of minutes
+  const maxHits = 4
+  const timeToLive = 5 * 60
+  const id = small
+
   // get some test data
-  const blob = DriveApp.getFileById(small).getBlob()
+  const blob = DriveApp.getFileById(id).getBlob()
   const content = blob.getDataAsString()
 
   // provide some optional probe info if a probe request is ever called
