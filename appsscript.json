@@ -1,0 +1,18 @@
+{
+  "timeZone": "Europe/London",
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "BmContentServer",
+        "libraryId": "12ZqFY1xFQjjuF43JsvQbOASfPwuiazMKTTlwNSGgxyjHLaJ1HC_hu2w5",
+        "version": "6"
+      }
+    ]
+  },
+  "webapp": {
+    "executeAs": "USER_DEPLOYING",
+    "access": "ANYONE_ANONYMOUS"
+  }
+}
