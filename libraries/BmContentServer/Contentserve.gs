@@ -249,7 +249,7 @@ const ContentServe = (() => {
   // todo - usercache isnt working when its a library yet so makeing them both scrptcahce for now
   // important that we use the usercache to limit access to the same person that created the link
   const getCacheStore = ({ anyone = false } = {}) => {
-    return anyone ? CacheService.getScriptCache() : CacheService.getScriptCache()
+    return anyone ? CacheService.getScriptCache() : CacheService.getUserCache()
   }
 
   /**
@@ -370,7 +370,7 @@ const ContentServe = (() => {
     }
 
     // thats an anyone store
-    const hitCacher = getCacher({ anyone: false })
+    const hitCacher = getCacher({ anyone: true })
     hitCacher.set(hitKey, hitPacket, {
       expiry: cacheTtl
     })
