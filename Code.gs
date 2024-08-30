@@ -9,7 +9,7 @@ const helloWorld = () => {
 
   // tnis link can be used only once and will expire after a short time
   // you can use it from the browser, to feed a webapp, serverapp - whatever
-  console.log (link)
+  console.log(link)
 
 }
 
@@ -26,13 +26,13 @@ const probeInfo = () => {
 
   // tnis link can be used only once and will expire after a short time
   // you can use it from the browser, to feed a webapp, serverapp - whatever
-  console.log (link)
+  console.log(link)
 
 }
 
 const fileContent = () => {
-  
-  const small ="1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
+
+  const small = "1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
   const content = DriveApp.getFileById(small).getBlob().getDataAsString()
 
   const link = Exports.ContentServe.toCache({
@@ -42,13 +42,13 @@ const fileContent = () => {
 
   // tnis link can be used only once and will expire after a short time
   // you can use it from the browser, to feed a webapp, serverapp - whatever
-  console.log (link)
+  console.log(link)
 
 }
 
 const jsonContent = () => {
 
-  const json ="1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r"
+  const json = "1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r"
   const content = DriveApp.getFileById(json).getBlob().getDataAsString()
 
   const link = Exports.ContentServe.toCache({
@@ -59,14 +59,14 @@ const jsonContent = () => {
 
   // tnis link can be used only once and will expire after a short time
   // you can use it from the browser, to feed a webapp, serverapp - whatever
-  console.log (link)
+  console.log(link)
 
 }
 
 
 const moreHits = () => {
 
-  const json ="1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r"
+  const json = "1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r"
   const content = DriveApp.getFileById(json).getBlob().getDataAsString()
 
   const link = Exports.ContentServe.toCache({
@@ -74,25 +74,98 @@ const moreHits = () => {
     accessToken: ScriptApp.getOAuthToken(),
     serveAs: "JSON",
     maxHits: 10,
-    timeToLive: 5* 60
+    timeToLive: 5 * 60
   })
 
   // tnis link can be used only once and will expire after a short time
   // you can use it from the browser, to feed a webapp, serverapp - whatever
-  console.log (link)
+  console.log(link)
 
+}
+
+const soak = () => {
+  const SOAKS = 400
+  const results = {
+    bad: 0,
+    good: 0,
+    wrong: 0,
+    missing: 0,
+    attempts: 0,
+    maxlinkMs: 0,
+    minlinkMs: Infinity,
+    totallinkMs: 0,
+    avglinkMs: 0,
+    maxfetchMs: 0,
+    minfetchMs: Infinity,
+    totalfetchMs: 0,
+    avgfetchMs: 0
+  }
+
+
+  for (let i = 0; i < SOAKS; i++) {
+    const content = new Date().getTime().toString()
+    const maxHits = Math.round (Math.random ()/ 2 + 1)
+    const timeToLive = Math.ceil (Math.random() * 60 ) +30
+    const delay = Math.round (Math.random() * 1000) + 1000
+    
+    results.attempts++
+    let start = new Date().getTime()
+    const link = Exports.ContentServe.toCache({
+      content,
+      accessToken: ScriptApp.getOAuthToken(),
+      maxHits,
+      timeToLive,
+    })
+    let elapsed = new Date().getTime() - start
+    results.minlinkMs = Math.min (results.minlinkMs, elapsed) 
+    results.maxlinkMs = Math.max (results.maxlinkMs, elapsed) 
+    results.totallinkMs += elapsed 
+    results.avglinkMs = Math.round (results.totallinkMs / results.attempts)
+    start = new Date().getTime()
+    const resp = UrlFetchApp.fetch(link, {
+      muteHttpExceptions: true
+    })
+
+    elapsed = new Date().getTime() - start
+    results.minfetchMs = Math.min (results.minfetchMs, elapsed) 
+    results.maxfetchMs = Math.max (results.maxfetchMs, elapsed) 
+    results.totalfetchMs += elapsed 
+    results.avgfetchMs = Math.round (results.totalfetchMs / results.attempts)
+
+    const status = resp.getResponseCode()
+    const text = resp.getContentText()
+    if (status !== 200) {
+      results.bad++
+      console.log('bad status', status)
+    }
+    if (text !== content) {
+      results.wrong ++
+      console.log('wrong content', text, content)
+    }
+    if (!text) {
+      results.missing ++
+      console.log('missing content', timeToLive)
+    }
+
+    if (text === content) {
+      results.good++
+    }
+
+    if (!(results.attempts % 20)) {
+      console.log(results)
+    }
+    Utilities.sleep (delay)
+  }
+  console.log (results)
 }
 
 
 
-//https://drive.google.com/file/d/1NYaGGZZXDCnBkxBKz9P0HmTRkbJfMq2r/view?usp=drive_link
-
-
 const testMethods = () => {
 
-const small ="1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
+  const small = "1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
 
-// by default the maxhits is just 1, and time to live is a couple of minutes
+  // by default the maxhits is just 1, and time to live is a couple of minutes
   const maxHits = 4
   const timeToLive = 5 * 60
   const id = small
@@ -113,7 +186,7 @@ const small ="1-0nNGD1zcDd2t17dCR1HmVMtaQIwO60h"
 
   // use the dev version of the serviceUrl
   const devService = false
-  
+
   //an accesstoken to be used in the second phase
   const accessToken = ScriptApp.getOAuthToken()
 
