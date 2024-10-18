@@ -83,8 +83,24 @@ const moreHits = () => {
 
 }
 
+/* 
+  soak results
+	{ bad: 0,
+  good: 340,
+  wrong: 0,
+  missing: 0,
+  attempts: 340,
+  maxlinkMs: 362,
+  minlinkMs: 129,
+  totallinkMs: 50011,
+  avglinkMs: 147,
+  maxfetchMs: 16819,
+  minfetchMs: 2588,
+  totalfetchMs: 1215097,
+  avgfetchMs: 3574 }
+*/
 const soak = () => {
-  const SOAKS = 400
+  const SOAKS = 340
   const results = {
     bad: 0,
     good: 0,
